@@ -4,13 +4,16 @@ Zombie z;
 boolean hp = false;
 ArrayList<Human> humans;
 ArrayList<Zombie> zombies;
+ArrayList<Vehicle> objects;
 void setup() {
   size(1000, 700);
   rectMode(CENTER);
   humans = new ArrayList<Human>();
   zombies = new ArrayList<Zombie>();
+  objects = new ArrayList<Vehicle>();
   for (int i = 0; i < 10; i++) {
-    spawnHuman();}
+    spawnHuman();
+    spawnObject();}
   z = new Zombie(width/2, height/2, 4, 3, 0.1);
   zombies.add(z);
   rightForce = new PVector(1,0);
@@ -24,10 +27,14 @@ void draw() {
     debug(zombies.get(i).update().display());}
   for(int i = 0; i < humans.size(); i++){ 
     debug(humans.get(i).update().display());}
+  for(int i = 0; i < objects.size(); i++){ 
+    objects.get(i).display();}
 }
 
 void spawnHuman(){
-    humans.add(new Human(random(0, width), random(0, height), 6, 4, 0.1));}
+    humans.add(new Human(random(0, width), random(0, height), 6, 4, 0.1, true));}
+void spawnObject(){
+        objects.add(new Human(random(0, width), random(0,height), 0,0,0, false));}
 void debug(Vehicle subject){
     if(showDebug){
       pushMatrix();

@@ -1,8 +1,11 @@
 class Human extends Vehicle {
-  Human(float x, float y, float r, float ms, float mf){
+  Human(float x, float y, float r, float ms, float mf, boolean o){
     super(x,y,r,ms,mf);
     fill(#ffffff);
-    body = createShape(RECT, 0,0,20,20);
+    if(o)
+      body = createShape(RECT, 0,0,20,20);
+    else
+      body = createShape(RECT, 0,0,20,10);
     range = 180;
   }
   
