@@ -1,3 +1,6 @@
+//current bugs:
+//Human targeting of zombies doesn't seem to be working. occasionally they sit up to the point of contact
+
 PVector rightForce, upForce;
 float buffer;
 Zombie z;
@@ -16,7 +19,7 @@ void setup() {
   zombies.add(z);
   rightForce = new PVector(1,0);
   upForce = new PVector(0,-1);
-  buffer = 50;
+  buffer = 90;
 }
 
 void draw() {
@@ -27,10 +30,10 @@ void draw() {
 
   for(int i = 0; i < zombies.size(); i++){ 
     zombies.get(i).update().display();}
-//    zombies.get(i).display();}
   for(int i = 0; i < humans.size(); i++){ 
-    humans.get(i).update();
-    humans.get(i).display();}
+    humans.get(i).update().display();}
+  //display debug method that will be called on all of the objects    
+  //debug(humans.get(i).update().display();)} as an example
 }
 boolean showDebug = true;
 void mousePressed() {

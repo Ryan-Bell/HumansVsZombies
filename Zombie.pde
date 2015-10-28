@@ -1,11 +1,7 @@
 class Zombie extends Vehicle {
-  PVector target;
-  PShape body;
-  PVector steeringForce;
-  float range;
+  
   Zombie(float x, float y, float r, float ms, float mf){
     super(x,y,r,ms,mf);
-    steeringForce = new PVector(0,0);
     body = createShape(ELLIPSE, 0,0,20,20);
     range = 120;
     target = position.copy();
@@ -30,18 +26,10 @@ class Zombie extends Vehicle {
   }
   void calcSteeringForces(){
    steeringForce.mult(0);
-   PVector seekForce = seek(target);
-   steeringForce.add(seekForce);
-   steeringForce.limit(maxForce);
+   steeringForce.add(seek(target)).add(correctiveForce).limit(maxForce);
    applyForce(steeringForce);
-   if(position.x < buffer)
-     applyForce(rightForce.copy());
-   if(position.x > width - buffer)
-     applyForce(rightForce.copy().mult(-1));
-   if(position.y < buffer)
-     applyForce(upForce.copy().mult(-1));
-   if(position.y > height - buffer)
-     applyForce(upForce.copy());
+   //this will be adjusted so that multiple forces are not applied
+   //applyForce(correctiveForce);
   }
   void display(){
     updateTarget();
