@@ -4,14 +4,14 @@ class Human extends Vehicle {
     super(x,y,r,ms,mf);
     fill(#ffffff);
     if(o)
-      body = createShape(RECT, 0,0,20,20);
+      body = createShape(RECT, 0,0,r,r);
     else
-      body = createShape(RECT, 0,0,20,10);
+      body = createShape(ELLIPSE, 0,0,30,30);
     range = 180;
     wanderRadius = 25;
     wanderDistance = 80;
     wanderDelta = .2;
-    rotation = random(0,2*PI);
+    rotation = PI;
   }
   
   void getSick(){

@@ -9,12 +9,12 @@ void setup() {
   size(1000, 700);
   rectMode(CENTER);
   humans = new ArrayList<Human>(400);
-  zombies = new ArrayList<Zombie>(400);
+  zombies = new ArrayList<Zombie>(00);
   objects = new ArrayList<Vehicle>();
   for (int i = 0; i < 10; i++) {
     spawnHuman();
     spawnObject();}
-  z = new Zombie(width/2, height/2, 4, 3, 0.1);
+  z = new Zombie(width/2, height/2, 2, 3, 0.1);
   zombies.add(z);
   rightForce = new PVector(1,0);
   upForce = new PVector(0,-1);
@@ -32,7 +32,7 @@ void draw() {
 }
 
 void spawnHuman(){
-    humans.add(new Human(random(0, width), random(0, height), 6, 4, 0.2, true));}
+    humans.add(new Human(random(0, width), random(0, height), 20, 4, 0.2, true));}
 void spawnObject(){
     objects.add(new Human(random(0, width), random(0,height), 0,0,0, false));}
 void debug(Vehicle subject){

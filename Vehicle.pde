@@ -1,6 +1,6 @@
 abstract class Vehicle {
   
-  PVector position, acceleration, velocity, forward, right, desired, target, steeringForce, correctiveForce;
+  PVector position, acceleration, velocity, forward, right, desired, target, steeringForce, correctiveForce, vecToCenter;
   float radius, maxSpeed, maxForce, range, minDist, mass = 1;
   PShape body;
   
@@ -42,6 +42,7 @@ abstract class Vehicle {
       correctiveForce.y = 1;
     if(position.y > height - buffer)
       correctiveForce.y = -1;
+    avoidObject();
     calcSteeringForces();
     velocity.add(acceleration).limit(maxSpeed);
     position.add(velocity);
@@ -59,6 +60,23 @@ abstract class Vehicle {
         minDist = tempDist;
       }
     }
+  }
+  
+  void avoidObject(){
+    float tempDist, safeDistance = 30;
+    for(Vehicle v : objects){
+      if((vecToCenter = PVector.sub(v.position, position)).mag() > safeDistance)
+        {continue;}
+      if(vecToCenter.dot(forward) < 0)
+        continue;
+      if(Math.abs(tempDist = vecToCenter.dot(right)) > 45)
+        continue;
+      if(tempDist < 0)
+        applyForce(right.copy().mult(maxSpeed *.5));
+      else
+        applyForce(right.copy().mult(maxSpeed * -.5));
+    }
+     
   }
 
   Vehicle applyForce(PVector force) {
