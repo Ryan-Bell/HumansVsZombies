@@ -1,10 +1,9 @@
 abstract class Vehicle {
   
   PVector position, acceleration, velocity, forward, right, desired, target, steeringForce, correctiveForce, vecToCenter;
-  float radius, maxSpeed, maxForce, range, minDist, mass = 1;
+  float radius, maxSpeed, maxForce, range, minDist, type, mass = 1;
   PShape body;
-  
-  Vehicle(float x, float y, float r, float ms, float mf) {
+  Vehicle(float x, float y, float r, float ms, float mf, float t) {
     acceleration = new PVector(0, 0);
     velocity = new PVector(0, 0);
     position = new PVector(x, y);
@@ -17,6 +16,7 @@ abstract class Vehicle {
     maxForce = mf;
     forward = new PVector(0, 0);
     right = new PVector(0, 0);
+    type = t;
   }
   
   abstract void calcSteeringForces();
@@ -24,7 +24,9 @@ abstract class Vehicle {
     pushMatrix();
     translate(position.x, position.y);
     rotate(velocity.heading());
-    shape(body,0,0);
+    if(type == 0)image(tree, -radius/2,-radius/2,radius,radius);
+    else if(type == 1)image(zomb, -radius/2,-radius/2,radius,radius);
+    else image(hum, -radius/2,-radius/2,radius,radius);
     popMatrix();
     return this;
   }

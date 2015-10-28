@@ -1,7 +1,7 @@
 class Zombie extends Vehicle {
   
-  Zombie(float x, float y, float r, float ms, float mf){
-    super(x,y,r,ms,mf);
+  Zombie(float x, float y, float r, float ms, float mf, float t){
+    super(x,y,r,ms,mf,t);
     fill(#333333);
     body = createShape(ELLIPSE, 0,0,r,r);
     range = 120;

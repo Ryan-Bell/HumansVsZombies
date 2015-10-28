@@ -1,7 +1,7 @@
 class Human extends Vehicle {
   float wanderRadius, wanderDistance, wanderDelta, rotation;
-  Human(float x, float y, float r, float ms, float mf, boolean o){
-    super(x,y,r,ms,mf);
+  Human(float x, float y, float r, float ms, float mf, boolean o, float t){
+    super(x,y,r,ms,mf,t);
     fill(#ffffff);
     if(o)
       body = createShape(RECT, 0,0,r,r);
@@ -15,7 +15,7 @@ class Human extends Vehicle {
   }
   
   void getSick(){
-      zombies.add(new Zombie(position.x,position.y,6,3,0.1));
+      zombies.add(new Zombie(position.x,position.y,6,3,0.1,1));
       humans.remove(this);
   }
   void calcSteeringForces(){
