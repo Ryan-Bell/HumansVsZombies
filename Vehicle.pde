@@ -19,7 +19,7 @@ abstract class Vehicle {
   }
   
   abstract void calcSteeringForces();
-  abstract void display();
+  abstract Vehicle display();
   
   Vehicle update() {
     forward = velocity.copy().normalize();

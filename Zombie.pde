@@ -31,24 +31,14 @@ class Zombie extends Vehicle {
    //this will be adjusted so that multiple forces are not applied
    //applyForce(correctiveForce);
   }
-  void display(){
+  Vehicle display(){
     updateTarget();
     float angle = velocity.heading();
     pushMatrix();
     translate(position.x, position.y);
-    if(showDebug){
-      stroke(255,0,0);
-      line(0,0,right.x*40, right.y*40);
-      stroke(0,0,255);
-      line(0,0,forward.x*40,forward.y*40);
-      stroke(0,255,0);
-      line(0,0,steeringForce.x*200, steeringForce.y*200);
-      stroke(100,100,100);
-      line(0,0,target.x-position.x,target.y-position.y);
-    }
     rotate(angle);
     shape(body,0,0);
     popMatrix();
-
+    return this;
   }
 }
