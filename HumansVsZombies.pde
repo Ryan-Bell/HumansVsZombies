@@ -8,8 +8,8 @@ ArrayList<Vehicle> objects;
 void setup() {
   size(1000, 700);
   rectMode(CENTER);
-  humans = new ArrayList<Human>();
-  zombies = new ArrayList<Zombie>();
+  humans = new ArrayList<Human>(400);
+  zombies = new ArrayList<Zombie>(400);
   objects = new ArrayList<Vehicle>();
   for (int i = 0; i < 10; i++) {
     spawnHuman();
@@ -32,27 +32,27 @@ void draw() {
 }
 
 void spawnHuman(){
-    humans.add(new Human(random(0, width), random(0, height), 6, 4, 0.1, true));}
+    humans.add(new Human(random(0, width), random(0, height), 6, 4, 0.2, true));}
 void spawnObject(){
-        objects.add(new Human(random(0, width), random(0,height), 0,0,0, false));}
+    objects.add(new Human(random(0, width), random(0,height), 0,0,0, false));}
 void debug(Vehicle subject){
     if(showDebug){
       pushMatrix();
       translate(subject.position.x, subject.position.y);
       stroke(255,0,0);
       line(0,0,subject.right.x*40, subject.right.y*40);
-      stroke(0,0,255);
-      line(0,0,subject.forward.x*40,subject.forward.y*40);
       stroke(0,255,0);
       line(0,0,subject.steeringForce.x*200, subject.steeringForce.y*200);
       stroke(100,100,100);
-      line(0,0,subject.target.x - subject.position.x,subject.target.y-subject.position.y);
-      ellipse(subject.target.x - subject.position.x,subject.target.y-subject.position.y, 10, 10);
       popMatrix();
+      stroke(0);
   }
 }
 
 boolean showDebug = true;
 void mousePressed() {
-  showDebug = !showDebug;
+  spawnHuman();
+}
+void keyPressed() {
+ showDebug = !showDebug;
 }

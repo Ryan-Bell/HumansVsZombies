@@ -55,7 +55,7 @@ abstract class Vehicle {
     for(Vehicle v : (ArrayList<Vehicle>)subjects){
       if((tempDist = dist(v.position.x, v.position.y, position.x, position.y)) < minDist){
         target = v.position.copy().add(PVector.mult(v.velocity, 7));
-        ellipse(target.x, target.y, 5,5);
+        if(showDebug)ellipse(target.x, target.y, 5,5);
         minDist = tempDist;
       }
     }

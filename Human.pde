@@ -26,7 +26,7 @@ class Human extends Vehicle {
     if(minDist < range)
       target = PVector.add(position, PVector.sub(position, target));
     else
-      target = wander(); //will replace with wander later
+      target = wander();
     steeringForce.mult(0);
     steeringForce.add(seek(target)).add(correctiveForce.mult(5)).limit(maxForce);
     applyForce(steeringForce);
