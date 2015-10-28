@@ -51,8 +51,9 @@ void debug(Vehicle subject){
 
 boolean showDebug = true;
 void mousePressed() {
-  spawnHuman();
+ showDebug = !showDebug;
 }
 void keyPressed() {
- showDebug = !showDebug;
+
+ spawnHuman();
 }
