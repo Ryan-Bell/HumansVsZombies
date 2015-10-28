@@ -1,22 +1,15 @@
 abstract class Vehicle {
-  PVector position;
-  PVector acceleration;
-  PVector velocity;
-  PVector forward;
-  PVector right;
-  float radius;
-  float maxSpeed;
-  float maxForce;
-  float mass = 1;
+  PVector position, acceleration, velocity, forward, right, desired;
+  float radius, maxSpeed, maxForce, mass = 1;
   
   Vehicle(float x, float y, float r, float ms, float mf) {
     acceleration = new PVector(0, 0);
     velocity = new PVector(0, 0);
     position = new PVector(x, y);
+    desired = position.copy();
     radius = r;
     maxSpeed = ms;
     maxForce = mf;
-
     forward = new PVector(0, 0);
     right = new PVector(0, 0);
   }
@@ -24,16 +17,15 @@ abstract class Vehicle {
   abstract void calcSteeringForces();
   abstract void display();
   
-  void update() {
-    forward = velocity.copy();
-    forward.normalize();
+  Vehicle update() {
+    forward = velocity.copy().normalize();
     right.x = -forward.y;
     right.y = forward.x;
     calcSteeringForces();
-    velocity.add(acceleration);
-    velocity.limit(maxSpeed);
+    velocity.add(acceleration).limit(maxSpeed);
     position.add(velocity);
     acceleration.mult(0);
+    return this;
   }
 
   void applyForce(PVector force) {
@@ -41,10 +33,7 @@ abstract class Vehicle {
   }
   
   PVector seek(PVector target) {
-    PVector desired = PVector.sub(target, position);
-    desired.normalize();
-    desired.mult(maxSpeed);
-    PVector steer = PVector.sub(desired, velocity);
-    return steer;
+    desired = PVector.sub(target, position).normalize().mult(maxSpeed);
+    return PVector.sub(desired, velocity);
   }
 }

@@ -1,9 +1,3 @@
-//Beginning to code autonomous agents
-//Will implement inheritance with a Vehicle class and a Seeker class
-//These "components" are similar to the way Unity uses components
-
-
-//Seeker s;
 PVector rightForce, upForce;
 float buffer;
 Zombie z;
@@ -27,20 +21,13 @@ void setup() {
 
 void draw() {
   background(255);
-
   fill(#E5D302);
   stroke(0);
   strokeWeight(2);
-  ellipse(mouseX, mouseY, 20, 20);
 
-  //update the seeker
-  //s.update();
-  //s.display();
-  //z.update();
-  //z.display();
   for(int i = 0; i < zombies.size(); i++){ 
-    zombies.get(i).update();
-    zombies.get(i).display();}
+    zombies.get(i).update().display();}
+//    zombies.get(i).display();}
   for(int i = 0; i < humans.size(); i++){ 
     humans.get(i).update();
     humans.get(i).display();}

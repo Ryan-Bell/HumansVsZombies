@@ -44,7 +44,6 @@ class Human extends Vehicle {
    if(position.y > height - buffer)
      applyForce(upForce.copy());
    
-   
   }
   void display(){
     updateTarget();
