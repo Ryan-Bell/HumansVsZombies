@@ -1,7 +1,7 @@
 abstract class Vehicle {
   
   PVector position, acceleration, velocity, forward, right, desired, target, steeringForce, correctiveForce;
-  float radius, maxSpeed, maxForce, range, mass = 1;
+  float radius, maxSpeed, maxForce, range, minDist, mass = 1;
   PShape body;
   
   Vehicle(float x, float y, float r, float ms, float mf) {
@@ -11,6 +11,7 @@ abstract class Vehicle {
     desired = position.copy();
     steeringForce = new PVector(0,0);
     correctiveForce = new PVector(0,0);
+    target = position.copy();
     radius = r;
     maxSpeed = ms;
     maxForce = mf;
@@ -19,13 +20,19 @@ abstract class Vehicle {
   }
   
   abstract void calcSteeringForces();
-  abstract Vehicle display();
+  Vehicle display(){
+    pushMatrix();
+    translate(position.x, position.y);
+    rotate(velocity.heading());
+    shape(body,0,0);
+    popMatrix();
+    return this;
+  }
   
   Vehicle update() {
     forward = velocity.copy().normalize();
     right.x = -forward.y;
     right.y = forward.x;
-    //TODO - Check bounds and apply corrective action passing it into calcsteering forces
     correctiveForce.mult(0);
     if(position.x < buffer)
       correctiveForce.x = 1;
@@ -36,11 +43,21 @@ abstract class Vehicle {
     if(position.y > height - buffer)
       correctiveForce.y = -1;
     calcSteeringForces();
-    
     velocity.add(acceleration).limit(maxSpeed);
     position.add(velocity);
     acceleration.mult(0);
     return this;
+  }
+
+  void findClosest(ArrayList subjects){
+    float tempDist;
+    minDist = width;
+    for(Vehicle v :  (ArrayList<Vehicle>)subjects){
+      if((tempDist = dist(v.position.x, v.position.y, position.x, position.y)) < minDist){
+        target = v.position.copy();
+        minDist = tempDist;
+      }
+    }
   }
 
   Vehicle applyForce(PVector force) {
