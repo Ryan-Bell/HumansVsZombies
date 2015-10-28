@@ -1,6 +1,3 @@
-//current bugs:
-//Human targeting of zombies doesn't seem to be working. occasionally they sit up to the point of contact
-
 PVector rightForce, upForce;
 float buffer;
 Zombie z;
@@ -43,6 +40,7 @@ void debug(Vehicle subject){
       line(0,0,subject.steeringForce.x*200, subject.steeringForce.y*200);
       stroke(100,100,100);
       line(0,0,subject.target.x - subject.position.x,subject.target.y-subject.position.y);
+      ellipse(subject.target.x - subject.position.x,subject.target.y-subject.position.y, 10, 10);
       popMatrix();
   }
 }

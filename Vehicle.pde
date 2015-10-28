@@ -52,9 +52,10 @@ abstract class Vehicle {
   void findClosest(ArrayList subjects){
     float tempDist;
     minDist = width;
-    for(Vehicle v :  (ArrayList<Vehicle>)subjects){
+    for(Vehicle v : (ArrayList<Vehicle>)subjects){
       if((tempDist = dist(v.position.x, v.position.y, position.x, position.y)) < minDist){
-        target = v.position.copy();
+        target = v.position.copy().add(PVector.mult(v.velocity, 7));
+        ellipse(target.x, target.y, 5,5);
         minDist = tempDist;
       }
     }
