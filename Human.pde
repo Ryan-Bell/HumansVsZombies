@@ -1,4 +1,5 @@
 class Human extends Vehicle {
+  float wanderRadius, wanderDistance, wanderDelta, rotation;
   Human(float x, float y, float r, float ms, float mf, boolean o){
     super(x,y,r,ms,mf);
     fill(#ffffff);
@@ -7,6 +8,10 @@ class Human extends Vehicle {
     else
       body = createShape(RECT, 0,0,20,10);
     range = 180;
+    wanderRadius = 25;
+    wanderDistance = 80;
+    wanderDelta = .2;
+    rotation = random(0,2*PI);
   }
   
   void getSick(){
@@ -21,9 +26,17 @@ class Human extends Vehicle {
     if(minDist < range)
       target = PVector.add(position, PVector.sub(position, target));
     else
-      target = position.copy(); //will replace with wander later
+      target = wander(); //will replace with wander later
     steeringForce.mult(0);
     steeringForce.add(seek(target)).add(correctiveForce.mult(5)).limit(maxForce);
     applyForce(steeringForce);
+  }
+  
+  PVector wander(){
+    rotation += random(wanderDelta*-1, wanderDelta);
+    return position.copy()
+      .add(velocity.copy().normalize().mult(wanderDistance))
+      .add(wanderRadius*cos(rotation+velocity.heading()), 
+           wanderRadius*sin(rotation+velocity.heading()));
   }
 }
