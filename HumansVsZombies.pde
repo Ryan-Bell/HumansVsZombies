@@ -18,7 +18,7 @@ void setup() {
     Human h = new Human(random(0, width), random(0, height), 6, 4, 0.1);
     humans.add(h);
   }
-  z = new Zombie(width/2, height/2, 6, 3, 0.1);
+  z = new Zombie(width/2, height/2, 4, 3, 0.1);
   zombies.add(z);
   rightForce = new PVector(1,0);
   upForce = new PVector(0,-1);
@@ -44,7 +44,6 @@ void draw() {
   for(int i = 0; i < humans.size(); i++){ 
     humans.get(i).update();
     humans.get(i).display();}
-  
 }
 boolean showDebug = true;
 void mousePressed() {
