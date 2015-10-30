@@ -1,15 +1,15 @@
 class Zombie extends Vehicle {
-  
+  //The contructor that takes all the same parameters that the vehicle class takes so it passes them all onto super
   Zombie(float x, float y, float r, float ms, float mf, float t){
     super(x,y,r,ms,mf,t);
     fill(#333333);
-    body = createShape(ELLIPSE, 0,0,r,r);
-    range = 120;
+    body = createShape(ELLIPSE, 0,0,r,r);                                          //when there are no images in use, the body is set as a gray circle
+    range = 120;                                                                   //the 'visibility' range is set to 120 pixels
   }
-  void calcSteeringForces(){
-    findClosest(humans);
-    steeringForce.mult(0);
-    steeringForce.add(seek(target)).add(correctiveForce.mult(5)).limit(maxForce);
-    applyForce(steeringForce);
+  void calcSteeringForces(){                                                       //calcSteeringForces is required to be overridden by the abstract class
+    findClosest(humans);                                                           //The target is set by calling findClosest on all of the humans
+    steeringForce.mult(0);                                                         //reset the steeringForce
+    steeringForce.add(seek(target)).add(correctiveForce.mult(5)).limit(maxForce);  //set the steering force to the result of seeking the future position and any bounds and obstacle avoidance forces
+    applyForce(steeringForce);                                                     //apply the updated steering force
   }
 }
