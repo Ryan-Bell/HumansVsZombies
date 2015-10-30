@@ -56,10 +56,10 @@ void debug(Vehicle subject){
 }
 
 boolean showDebug = true;                                     //instantiate the debug boolean to a start value of true
-void mousePressed() {                                         //set the action
+void mousePressed() {                                         //set the action for clicking the mouse to toggle the debug lines
  showDebug = !showDebug;
 }
-void keyPressed() {
+void keyPressed() {                                          //set the action for clicking any of the keys to spawn a human 
 
  spawnHuman();
 }
